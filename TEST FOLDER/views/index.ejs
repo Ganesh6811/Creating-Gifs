@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating GIFs from Video</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            color: #ffd700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: #ecf0f1;
+            width: 80%;
+            max-width: 800px;
+            margin: 10px auto 30px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        form {
+            background: #34495e;
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        form:hover {
+            transform: scale(1.02);
+        }
+
+        label {
+            font-size: 1.1rem;
+            color: #ecf0f1;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="file"], input[type="number"], input[type="text"] {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ecf0f1;
+            width: 100%;
+            background-color: #2c3e50;
+            color: #fff;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #16a085;
+        }
+
+        button {
+            background: #1abc9c;
+            border: none;
+            padding: 12px 20px;
+            color: #fff;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #16a085;
+        }
+
+        .output-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .output-section img {
+            width: 300px;
+            height: 200px;
+            margin: 10px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .output-section p {
+            color: #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Creating GIFs from Video</h1>
+
+    <div class="description">
+        <p>Beginner-friendly way to create a GIF from a video online. Capture the best moments from any video by transforming it into engaging, high-quality GIFs with ease. Upload your video and watch the magic happen!</p>
+    </div>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="video">Choose the video to upload:</label>
+        <input type="file" id="video" name="video" accept="video/*" required>
+
+        <button type="submit">Upload and Create GIF</button>
+    </form>
+
+    <h1>Output GIF Animation</h1>
+    <div class="output-section">
+        <% if (Path && Path.length > 0) { %>
+            <% Path.forEach((gifPath, index) => { %>
+                <div>
+                    <img class="gif_image" src="<%= gifPath %>" alt="Generated GIF <%= index + 1 %>">
+                    <p>GIF <%= index + 1 %></p>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No GIFs available yet. Upload a video to generate one!</p>
+        <% } %>
+    </div>
+</body>
+</html>
